@@ -98,8 +98,9 @@ let questionArray = [Question1, Question2, Question3, Question5, Question6, Ques
     $("#start-btn").click(function () {
         Question8.printToScreen()
         Question8.questionTimer()
-        $("#game-section").show()
         $("#time").show()
+        $("#game-section").show()
+        
         $("#start-btn").hide()
     })
 })
