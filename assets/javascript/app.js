@@ -27,7 +27,13 @@ class Question {
         this.answ3 = answ3;
         this.answ4 = answ4;
         this.correctAnsw = correctAnsw;
+        this.timeup = false;
+        this.questionTimer();
+        this.isAnsweredCorrect = false;
+        //this.printQuestionToConsole();
+
     }
+        
 
     questionTimer() {
         let timer = 30;
@@ -37,11 +43,11 @@ class Question {
             timer--;
             $("#time").text("Time left: " + timer);
             if (timer === 0) {
-                stop();
-                alert("out of time");
+                stop();                
+                $("#game-section").html("<h1> Out of Time! <h1>")                
+                this.timeup = true;
             }
         }
-
         function stop() {
             clearInterval(intervalId);
 
@@ -53,14 +59,64 @@ class Question {
         }
         run();
     }
+    
+    //check if clicked answer is correct answer
+    checkifClickedisCorrect() {
+        var ans1 = this.answ1  //my method of binding class variable to be visible in the click events
+        var ans2 = this.answ2
+        var ans3 = this.answ3
+        var ans4 = this.answ4
+        var correct = this.correctAnsw
+        var isClickedCorrect = false;
+
+        $("#answer-a").click(() => {
+            console.log(this.isAnsweredCorrect);
+            console.log($(this));
+            if(ans1 === correct)
+            {
+                console.log("correct");
+                this.isAnsweredCorrect = true;
+
+            }
+            else{console.log("incorrect")}
+        })
+        $("#answer-b").click(() => {
+            console.log(this.isAnsweredCorrect);
+            if(ans2 === correct)
+            {
+                console.log("correct");
+                this.isAnsweredCorrect = true;
+            }
+            else{console.log("incorrect")}
+        })
+        $("#answer-c").click(() => {
+            console.log(this.isAnsweredCorrect);
+            if(ans3 === correct)
+            {
+                console.log("correct");
+                this.isAnsweredCorrect = true;
+            }
+            else{console.log("incorrect")}
+        })
+        $("#answer-d").click(() => {
+            console.log(this.isAnsweredCorrect);
+            if(ans4 === correct)
+            {
+                console.log("correct");
+                this.isAnsweredCorrect = true;
+            }
+            else{console.log("incorrect")}
+        })
+        return isClickedCorrect;
+    }
 
     //Print to screen
     printToScreen() {
         $("#question-id").text(this.question);
-        $("#answer-a").text("a. " + this.answ1);
-        $("#answer-b").text("b. " + this.answ2);
-        $("#answer-c").text("c. " + this.answ3);
-        $("#answer-d").text("d. " + this.answ4);
+        $("#answer-a").text(this.answ1);
+        $("#answer-b").text(this.answ2);
+        $("#answer-c").text(this.answ3);
+        $("#answer-d").text(this.answ4);
     }
 
     printQuestionToConsole() {
@@ -71,8 +127,6 @@ class Question {
         console.log("d:", this.answ4);
         console.log(this.correctAnsw);
     }
-
-
 
 }
 $(document).ready(function () {
@@ -96,11 +150,29 @@ let questionArray = [Question1, Question2, Question3, Question5, Question6, Ques
 
 
     $("#start-btn").click(function () {
-        Question8.printToScreen()
-        Question8.questionTimer()
+        Question1.printToScreen()
+        bools = Question1.checkifClickedisCorrect()
+        console.log(bools)
+
+        //display question1
+        //if time runs out on question 1 go to question 2
+        
+        // for(var i = 0; i < questionArray.length; i++)
+        // {              
+        //     if(!questionArray[i].timeup){
+        //     questionArray[i].printToScreen()
+        //     //questionArray[i].questionTimer()
+        //     }
+
+        // }
         $("#time").show()
         $("#game-section").show()
-        
         $("#start-btn").hide()
     })
+
+
+    
+
+    
+
 })
