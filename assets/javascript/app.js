@@ -29,6 +29,28 @@ class Question {
         this.correctAnsw = correctAnsw;
     }
 
+    questionTimer(){
+       let timer = 30;
+       let intervalId;
+       function decrement() {
+           timer--;
+           $("#time").text("Time left: " + timer);
+           if(timer === 0){
+            stop();
+            alert("out of time");
+        }
+       }
+       function stop(){
+           clearInterval(intervalId);
+           
+       }
+       function run(){
+           clearInterval(intervalId);
+           intervalId = setInterval(decrement, 1000);
+       }
+       run();
+    }
+
     //Print to screen
     printToScreen(){
         $("#question-id").text( this.question);
@@ -46,6 +68,8 @@ class Question {
         console.log("d:", this.answ4);
         console.log(this.correctAnsw);
     }
+
+   
 
 }
 $(document).ready(function() {
@@ -66,6 +90,7 @@ let Question9 = new Question("What skier has an infamos video of breaking both a
 
 $("#start-btn").click(function(){
     Question8.printToScreen()
+    Question8.questionTimer()
     $("#game-section").show()
     $("#time").show()
     $("#start-btn").hide()
