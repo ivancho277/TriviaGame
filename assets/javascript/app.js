@@ -8,16 +8,17 @@
 // 4.Which ski Resort is NOT in Idaho.
 // a.Sun Valley b.Bogus Basin c.Jackson Hole d.Targhee
 // 5.What is the biggest ski Resort in North America?
-// a.Whistler Blackcomb b.Big SKy c.Park City d.Heavenly
+// a.Whistler-Blackcomb b.Big SKy c.Park City d.Heavenly
 // 6.Which ski resort is NOT in Colorado?
 // a.Crested Butte b.Whitefish c.Breckenridge d.Steamboat
 // 7.How high is Chacaltaya Bolivia, the highest ski resort in the world
-// a.20,110ft. b.17,785ft c.13,230ft d.15,000ft
+// a.20,110ft. b.17,785ft c.13,235ft d.15,000ft
 // 8.What male skier holds the most xGames medals
 // a.Tanner Hall b.Simon Dumont c.Tom Wallisch d.Gus Kenworthy
 // 9.What skier has an infamos video of breaking both ankles?
 // a.Gus Kenworthy b.Candide Thorvex c.James Woods d.Tanner Hall
 
+//Class to build each question
 class Question {
     constructor(question, answ1, answ2, answ3, answ4, correctAnsw){
         this.question = question;
@@ -29,10 +30,13 @@ class Question {
     }
 
     //Print to screen
-
-
-
-
+    printToScreen(){
+        $("#question-id").text( this.question);
+        $("#answer-a").text("a. " + this.answ1);
+        $("#answer-b").text("b. " + this.answ2);
+        $("#answer-c").text("c. " + this.answ3);
+        $("#answer-d").text("d. " + this.answ4);
+    }
 
     printQuestionToConsole(){
         console.log(this.question);
@@ -45,14 +49,23 @@ class Question {
 
 }
 $(document).ready(function() {
+
+
+
+  
 $("#game-section").hide()
-let Question1 = new Question("How many ski resorts are in Washington State?", "10", "16", "20", "31", "20");
+let Question1 = new Question("How many ski area are in Washington State?", "10", "16", "20", "31", "20");
+let Question2 = new Question("What is the closest ski resort to Seattle?", "Stevens Pass", "Snoqualmie Pass", "Mt. Baker", "Hurrican Ridge", "Snoqualmie Pass")
+let Question3 = new Question("What ski resort holds the record for most snowfall in a single season for the USA(at 1,140inches)?", "Alta, UT", "Mt. Baker, WA", "Timberline, OR", "Alyeska, AK", "Mt. Baker, WA")
+let Question4 = new Question("Which ski Resort is NOT in Idaho?", "Sun Valley", "Bogus Basin", "Jackson Hole", "Targhee","Jackson Hole")
+let Question5 = new Question("What is the biggest ski Resort in North America?", "Whistler-Blackcomb", "Big Sky", "Park City", "Heavenly", "Whistler-Blackcomb")
+let Question6 = new Question("Which ski resort is NOT in Colorado?", "Crested Butte", "Whitefish", "Breckenridge", "Steamboat", "Whitefish")
+let Question7 = new Question("How high is Chacaltaya Bolivia, the highest ski resort in the world?", "20,110ft.", "17,785ft", "13,235ft", "15,000ft", "17,785ft")
+let Question8 = new Question("What male skier holds the most X-Games medals?", "Tanner Hall", "Simon Dumont", "Tom Wallisch", "Gus Kenworthy", "Tanner Hall")
+let Question9 = new Question("What skier has an infamos video of breaking both ankles?", "Gus Kenworthy", "James Woods","Candide Thorvex","Tanner Hall","Tanner Hall")
+
 $("#start-btn").click(function(){
-    $("#question-id").text( Question1.question);
-    $("#answer-a").text("a. " + Question1.answ1);
-    $("#answer-b").text("b. " + Question1.answ2);
-    $("#answer-c").text("c. " + Question1.answ3);
-    $("#answer-d").text("d. " + Question1.answ4);
+    Question8.printToScreen()
     $("#game-section").show()
     $("#start-btn").hide()
 })
