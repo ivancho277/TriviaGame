@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 
 
-  
+$("#time").hide()
 $("#game-section").hide()
 let Question1 = new Question("How many ski area are in Washington State?", "10", "16", "20", "31", "20");
 let Question2 = new Question("What is the closest ski resort to Seattle?", "Stevens Pass", "Snoqualmie Pass", "Mt. Baker", "Hurrican Ridge", "Snoqualmie Pass")
@@ -67,6 +67,7 @@ let Question9 = new Question("What skier has an infamos video of breaking both a
 $("#start-btn").click(function(){
     Question8.printToScreen()
     $("#game-section").show()
+    $("#time").show()
     $("#start-btn").hide()
 })
 })
