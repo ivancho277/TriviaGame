@@ -33,6 +33,7 @@ class Question {
 
 
 
+
     printQuestionToConsole(){
         console.log(this.question);
         console.log("a:", this.answ1);
@@ -43,6 +44,16 @@ class Question {
     }
 
 }
-
-let Question1 = new Question("1.How many ski resorts are in Washington State?", "10", "16", "20", "31", "20");
-Question1.printQuestionToConsole();
+$(document).ready(function() {
+$("#game-section").hide()
+let Question1 = new Question("How many ski resorts are in Washington State?", "10", "16", "20", "31", "20");
+$("#start-btn").click(function(){
+    $("#question-id").text( Question1.question);
+    $("#answer-a").text("a. " + Question1.answ1);
+    $("#answer-b").text("b. " + Question1.answ2);
+    $("#answer-c").text("c. " + Question1.answ3);
+    $("#answer-d").text("d. " + Question1.answ4);
+    $("#game-section").show()
+    $("#start-btn").hide()
+})
+})
