@@ -28,14 +28,15 @@ class Question {
         this.answ4 = answ4;
         this.correctAnsw = correctAnsw;
         this.timeup = false;
-        this.questionTimer();
+        //this.questionTimer();
         this.isAnsweredCorrect = false;
         //this.printQuestionToConsole();
+        
 
     }
         
 
-    questionTimer() {
+    static questionTimer() {
         let timer = 30;
         let intervalId;
 
@@ -67,8 +68,7 @@ class Question {
         var ans3 = this.answ3
         var ans4 = this.answ4
         var correct = this.correctAnsw
-        var isClickedCorrect = false;
-
+        
         $("#answer-a").click(() => {
             console.log(this.isAnsweredCorrect);
             console.log($(this));
@@ -90,33 +90,35 @@ class Question {
             else{console.log("incorrect")}
         })
         $("#answer-c").click(() => {
-            console.log(this.isAnsweredCorrect);
+            
             if(ans3 === correct)
             {
                 console.log("correct");
                 this.isAnsweredCorrect = true;
+                console.log(this.isAnsweredCorrect);
             }
             else{console.log("incorrect")}
         })
         $("#answer-d").click(() => {
-            console.log(this.isAnsweredCorrect);
+            
             if(ans4 === correct)
             {
                 console.log("correct");
                 this.isAnsweredCorrect = true;
+                console.log(this.isAnsweredCorrect);
             }
             else{console.log("incorrect")}
         })
-        return isClickedCorrect;
+        
     }
 
     //Print to screen
     printToScreen() {
-        $("#question-id").text(this.question);
-        $("#answer-a").text(this.answ1);
-        $("#answer-b").text(this.answ2);
-        $("#answer-c").text(this.answ3);
-        $("#answer-d").text(this.answ4);
+        $("#question-id").html(this.question);
+        $("#answer-a").html(this.answ1);
+        $("#answer-b").html(this.answ2);
+        $("#answer-c").html(this.answ3);
+        $("#answer-d").html(this.answ4);
     }
 
     printQuestionToConsole() {
@@ -150,18 +152,23 @@ let questionArray = [Question1, Question2, Question3, Question5, Question6, Ques
 
 
     $("#start-btn").click(function () {
-        Question1.printToScreen()
-        bools = Question1.checkifClickedisCorrect()
-        console.log(bools)
+        Question1.printToScreen();
+        Question1.checkifClickedisCorrect();
+        Question.questionTimer();
+
+      
+     
 
         //display question1
-        //if time runs out on question 1 go to question 2
+        //if time runs out on question 1 go to question 2 etc...
+
+
         
         // for(var i = 0; i < questionArray.length; i++)
         // {              
-        //     if(!questionArray[i].timeup){
-        //     questionArray[i].printToScreen()
-        //     //questionArray[i].questionTimer()
+        //     {
+        //     
+        //
         //     }
 
         // }
@@ -170,9 +177,14 @@ let questionArray = [Question1, Question2, Question3, Question5, Question6, Ques
         $("#start-btn").hide()
     })
 
-
+$('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
+    if(Question1.isAnsweredCorrect === true){
+        $("#game-section")
+        Question2.printToScreen();
+    }
+})
     
 
-    
+
 
 })
