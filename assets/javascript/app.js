@@ -62,19 +62,19 @@ class Question {
     //check if clicked answer is correct answer
     //takes a click event id as a parameter
     checkifClickedisCorrect(id) {
-        if(id === "answer-a"){
+        if (id === "answer-a") {
             console.log(this.isAnsweredCorrect);
             console.log($(this));
             if (this.answ1 === this.correctAnsw) {
                 console.log("correct");
-                
+
                 this.isAnsweredCorrect = true;
 
             } else {
                 console.log("incorrect")
             }
         }
-        if(id === "answer-b") {
+        if (id === "answer-b") {
             console.log(this.isAnsweredCorrect);
             if (this.answ2 === this.correctAnsw) {
                 console.log("correct");
@@ -83,7 +83,7 @@ class Question {
                 console.log("incorrect")
             }
         }
-        if(id === "answer-c"){
+        if (id === "answer-c") {
             if (this.answ3 === this.correctAnsw) {
                 console.log("correct");
                 this.isAnsweredCorrect = true;
@@ -92,7 +92,7 @@ class Question {
                 console.log("incorrect")
             }
         }
-        if(id === "#answer-d"){
+        if (id === "#answer-d") {
 
             if (this.answ4 === this.correctAnsw) {
                 console.log("correct");
@@ -138,8 +138,8 @@ let Question9 = new Question("What skier has an infamos video of breaking both a
 wins = 0;
 
 //shuffle array by mixing up elements 10 times
-function shuffle(arraytoshuffle){
-    for(var i = 0; i < 10; i++){
+function shuffle(arraytoshuffle) {
+    for (var i = 0; i < 10; i++) {
         var element = arraytoshuffle[0];
         var Random = Math.floor(Math.random() * 9);
         arraytoshuffle[0] = arraytoshuffle[Random]
@@ -154,7 +154,7 @@ $(document).ready(function () {
     $("#game-section").hide()
 
 
-    let questionArray = [Question1, Question2, Question3, Question5, Question6, Question7, Question8, Question9]
+    let questionArray = [Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9]
     console.log(questionArray);
 
     shuffle(questionArray);
@@ -175,12 +175,18 @@ $(document).ready(function () {
     //render next question object in question array 
     $('#answer-a, #answer-b, #answer-c, #answer-d').click((event) => {
         // $("#game-section")
-       questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
-        questionArray.length - 2 > currentIndex ? currentIndex++ : 0
-        questionArray[currentIndex].printToScreen();
+        
+            questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
+            questionArray.length - 1 > currentIndex ? currentIndex++ : 0
+            questionArray[currentIndex].printToScreen();
+        $("#question-id").append("<br> Correct Answers: " + wins)
+        if(currentIndex === questionArray.length -1){
+            $("#game-section").html("<h1>End of game! Correct Answers: " + wins +"<h1>")
+        }
+
     })
 
-    $("#question-id").text("Correct Answers: " + wins)
-    
+
+
 
 })
