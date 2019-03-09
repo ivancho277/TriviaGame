@@ -29,7 +29,7 @@ class Question {
         this.correctAnsw = correctAnsw;
         this.timeup = false;
         //this.questionTimer();
-        this.isAnsweredCorrect;
+        this.isAnsweredCorrect = false;
         //this.printQuestionToConsole();
 
 
@@ -63,21 +63,22 @@ class Question {
     }
 
     //check if clicked answer is correct answer
-    checkifClickedisCorrect() {
+    checkifClickedisCorrect(id) {
 
 
-        $("#answer-a").click(() => {
+        if(id === "answer-a"){
             console.log(this.isAnsweredCorrect);
             console.log($(this));
             if (this.answ1 === this.correctAnsw) {
                 console.log("correct");
+                
                 this.isAnsweredCorrect = true;
 
             } else {
                 console.log("incorrect")
             }
-        })
-        $("#answer-b").click(() => {
+        }
+        if(id === "answer-b") {
             console.log(this.isAnsweredCorrect);
             if (this.answ2 === this.correctAnsw) {
                 console.log("correct");
@@ -85,9 +86,8 @@ class Question {
             } else {
                 console.log("incorrect")
             }
-        })
-        $("#answer-c").click(() => {
-
+        }
+        if(id === "answer-c"){
             if (this.answ3 === this.correctAnsw) {
                 console.log("correct");
                 this.isAnsweredCorrect = true;
@@ -95,8 +95,8 @@ class Question {
             } else {
                 console.log("incorrect")
             }
-        })
-        $("#answer-d").click(() => {
+        }
+        if(id === "#answer-d"){
 
             if (this.answ4 === this.correctAnsw) {
                 console.log("correct");
@@ -105,13 +105,17 @@ class Question {
             } else {
                 console.log("incorrect")
             }
-        })
-
+        }
+        return this.isAnsweredCorrect;
 
     }
 
     //Print to screen
     printToScreen() {
+
+
+
+
         $("#question-id").html(this.question);
         $("#answer-a").html(this.answ1);
         $("#answer-b").html(this.answ2);
@@ -139,7 +143,7 @@ let Question6 = new Question("Which ski resort is NOT in Colorado?", "Crested Bu
 let Question7 = new Question("How high is Chacaltaya Bolivia, the highest ski resort in the world?", "20,110ft.", "17,785ft", "13,235ft", "15,000ft", "17,785ft")
 let Question8 = new Question("What male skier holds the most X-Games medals?", "Tanner Hall", "Simon Dumont", "Tom Wallisch", "Gus Kenworthy", "Tanner Hall")
 let Question9 = new Question("What skier has an infamos video of breaking both ankles?", "Gus Kenworthy", "James Woods", "Candide Thorvex", "Tanner Hall", "Tanner Hall")
-
+wins = 0;
 
 $(document).ready(function () {
 
@@ -152,65 +156,23 @@ $(document).ready(function () {
     let questionArray = [Question1, Question2, Question3, Question5, Question6, Question7, Question8, Question9]
     console.log(questionArray);
 
+    currentIndex = 0;
 
     $("#start-btn").click(function () {
-        Question1.printToScreen();
-        Question1.checkifClickedisCorrect();
+        questionArray[currentIndex].printToScreen();
+        //Question1.checkifClickedisCorrect();
         Question.questionTimer();
-
-
-
-
-        //display question1
-        //if time runs out on question 1 go to question 2 etc...
-
-
-
-        // for(var i = 0; i < questionArray.length; i++)
-        // {              
-        //     {
-        //     
-        //
-        //     }
-
-        // }
         $("#time").show()
         $("#game-section").show()
         $("#start-btn").hide()
     })
-    $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
+    $('#answer-a, #answer-b, #answer-c, #answer-d').click((event) => {
         // $("#game-section")
-        Question2.printToScreen();
-        $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
+       questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
+        questionArray.length - 1 > currentIndex ? currentIndex++ : 0
+        questionArray[currentIndex].printToScreen();
 
-            Question3.printToScreen();
-
-            $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                Question4.printToScreen();
-
-                $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                    Question5.printToScreen()
-
-                    $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                        Question6.printToScreen();
-                        $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                            Question7.printToScreen();
-
-                            $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                                Question8.printToScreen();
-                                $('#answer-a, #answer-b, #answer-c, #answer-d').click(() => {
-                                    Question9.printToScreen();
-                                })
-
-                            })
-
-
-                        })
-
-                    })
-                })
-            })
-
-        })
     })
+    
+
 })
