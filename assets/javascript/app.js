@@ -31,11 +31,9 @@ class Question {
         //this.questionTimer();
         this.isAnsweredCorrect = false;
         //this.printQuestionToConsole();
-
-
     }
 
-
+    //
     static questionTimer() {
         let timer = 100;
         let intervalId;
@@ -52,7 +50,6 @@ class Question {
 
         function stop() {
             clearInterval(intervalId);
-
         }
 
         function run() {
@@ -63,9 +60,8 @@ class Question {
     }
 
     //check if clicked answer is correct answer
+    //takes a click event id as a parameter
     checkifClickedisCorrect(id) {
-
-
         if(id === "answer-a"){
             console.log(this.isAnsweredCorrect);
             console.log($(this));
@@ -107,14 +103,10 @@ class Question {
             }
         }
         return this.isAnsweredCorrect;
-
     }
 
     //Print to screen
     printToScreen() {
-
-
-
 
         $("#question-id").html(this.question);
         $("#answer-a").html(this.answ1);
@@ -133,7 +125,7 @@ class Question {
     }
 
 }
-
+//building all qestion objects
 let Question1 = new Question("How many ski area are in Washington State?", "10", "16", "20", "31", "20");
 let Question2 = new Question("What is the closest ski resort to Seattle?", "Stevens Pass", "Snoqualmie Pass", "Mt. Baker", "Hurrican Ridge", "Snoqualmie Pass")
 let Question3 = new Question("What ski resort holds the record for most snowfall in a single season for the USA(at 1,140inches)?", "Alta, UT", "Mt. Baker, WA", "Timberline, OR", "Alyeska, AK", "Mt. Baker, WA")
@@ -145,9 +137,18 @@ let Question8 = new Question("What male skier holds the most X-Games medals?", "
 let Question9 = new Question("What skier has an infamos video of breaking both ankles?", "Gus Kenworthy", "James Woods", "Candide Thorvex", "Tanner Hall", "Tanner Hall")
 wins = 0;
 
+//shuffle array by mixing up elements 10 times
+function shuffle(arraytoshuffle){
+    for(var i = 0; i < 10; i++){
+        var element = arraytoshuffle[0];
+        var Random = Math.floor(Math.random() * 9);
+        arraytoshuffle[0] = arraytoshuffle[Random]
+        arraytoshuffle[Random] = element;
+    }
+}
+
+//what will render to screen
 $(document).ready(function () {
-
-
 
     $("#time").hide()
     $("#game-section").hide()
@@ -156,8 +157,12 @@ $(document).ready(function () {
     let questionArray = [Question1, Question2, Question3, Question5, Question6, Question7, Question8, Question9]
     console.log(questionArray);
 
+    shuffle(questionArray);
+
     currentIndex = 0;
 
+
+    //begin after starts click
     $("#start-btn").click(function () {
         questionArray[currentIndex].printToScreen();
         //Question1.checkifClickedisCorrect();
@@ -166,13 +171,16 @@ $(document).ready(function () {
         $("#game-section").show()
         $("#start-btn").hide()
     })
+
+    //render next question object in question array 
     $('#answer-a, #answer-b, #answer-c, #answer-d').click((event) => {
         // $("#game-section")
        questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
-        questionArray.length - 1 > currentIndex ? currentIndex++ : 0
+        questionArray.length - 2 > currentIndex ? currentIndex++ : 0
         questionArray[currentIndex].printToScreen();
-
     })
+
+    $("#question-id").text("Correct Answers: " + wins)
     
 
 })
