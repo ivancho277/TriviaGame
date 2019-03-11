@@ -158,7 +158,7 @@ $(document).ready(function () {
     console.log(questionArray);
 
     shuffle(questionArray);
-
+    //index to iterate through question array further down.
     currentIndex = 0;
 
 
@@ -175,13 +175,14 @@ $(document).ready(function () {
     //render next question object in question array 
     $('#answer-a, #answer-b, #answer-c, #answer-d').click((event) => {
         // $("#game-section")
-        
-            questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
-            questionArray.length - 1 > currentIndex ? currentIndex++ : 0
-            questionArray[currentIndex].printToScreen();
+
+        //iteration and checking if question is answered correct
+        questionArray[currentIndex].checkifClickedisCorrect(event.target.id) ? wins++ : 0
+        questionArray.length - 1 > currentIndex ? currentIndex++ : 0
+        questionArray[currentIndex].printToScreen();
         $("#question-id").append("<br> Correct Answers: " + wins)
-        if(currentIndex === questionArray.length -1){
-            $("#game-section").html("<h1>End of game! Correct Answers: " + wins +"<h1>")
+        if (currentIndex === questionArray.length - 1) {
+            $("#game-section").html("<h1>End of game! Correct Answers: " + wins + "<h1>")
         }
 
     })
